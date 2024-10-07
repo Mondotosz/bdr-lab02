@@ -1,0 +1,27 @@
+services:
+  postgresql:
+    image: "bitnami/postgresql:17"
+    container_name: bdr-postgresql
+    environment:
+      POSTGRESQL_USERNAME: bdr
+      POSTGRESQL_PASSWORD: bdr
+      POSTGRESQL_DATABASE: bdr
+      POSTGRESQL_POSTGRES_PASSWORD: root
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - .:/data:ro
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - bdr-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+networks:
+  bdr-net:
+    driver: bridge
+volumes:
+  pgdata:
