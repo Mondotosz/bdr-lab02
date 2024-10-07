@@ -2,6 +2,7 @@ services:
   postgresql:
     image: "bitnami/postgresql:17"
     container_name: bdr-postgresql
+    restart: unless-stopped
     environment:
       POSTGRESQL_USERNAME: bdr
       POSTGRESQL_PASSWORD: bdr
