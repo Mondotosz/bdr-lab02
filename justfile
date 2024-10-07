@@ -14,5 +14,8 @@ run:
 revert:
   sqlx migrate revert
 
+revert_all:
+  sqlx migrate revert --target-version 0
+
 try:
   sqlx migrate run && sqlx migrate revert --target-version 0
