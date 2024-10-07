@@ -18,14 +18,14 @@ create table employee (
 );
 
 create table department (
-  dname integer not null,
+  dname varchar(15) not null,
   dnumber integer not null,
   mgr_ssn char(9) not null,
   mgr_start_date date not null,
   primary key (dnumber)
 );
 
-create table dept_location (
+create table dept_locations (
   dnumber integer not null,
   dlocation integer not null,
   primary key (dnumber, dlocation)
