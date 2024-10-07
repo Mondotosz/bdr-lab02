@@ -13,3 +13,6 @@ run:
 
 revert:
   sqlx migrate revert
+
+try:
+  sqlx migrate run && sqlx migrate revert
