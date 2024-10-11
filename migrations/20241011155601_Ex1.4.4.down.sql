@@ -1,0 +1,19 @@
+SET
+    SEARCH_PATH TO company;
+
+BEGIN;
+
+SET CONSTRAINTS ALL DEFERRED;
+
+DELETE FROM department
+WHERE
+    dnumber = 10;
+
+DELETE FROM employee
+WHERE
+    ssn = '555444333';
+
+COMMIT;
+
+SET
+    SEARCH_PATH TO public;
