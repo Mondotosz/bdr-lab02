@@ -1,5 +1,10 @@
-SET SEARCH_PATH TO company;
+SET
+    SEARCH_PATH TO company;
 
-INSERT INTO department VALUES('Research', 5, '333445555', '1988-05-22');
+INSERT INTO
+    department
+VALUES
+    ('Research', 5, '333445555', '1988-05-22');
 
-SET SEARCH_PATH TO public;
+SET
+    SEARCH_PATH TO public;

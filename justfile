@@ -19,3 +19,9 @@ revert_all:
 
 try:
   sqlx migrate run && sqlx migrate revert --target-version 0
+
+format:
+  #!/usr/bin/env bash
+  for file in ./migrations/*.sql; do
+    sql-formatter --config ./.sql-formatter.json --fix $file;
+  done

@@ -1,64 +1,49 @@
 -- Add up migration script here
-create schema company;
+CREATE SCHEMA company;
 
-set search_path to company;
+SET
+    search_path TO company;
 
-create table employee (
-  fname varchar(15) not null,
-  minit char(1),
-  lname varchar (15) not null,
-  ssn char(9) not null,
-  bdate date,
-  address varchar(30),
-  sex char (1),
-  salary decimal(10, 2),
-  super_ssn char(9),
-  dno integer not null,
-  primary key (ssn)
+CREATE TABLE employee (
+    fname varchar(15) NOT NULL,
+    minit char(1),
+    lname varchar(15) NOT NULL,
+    ssn char(9) NOT NULL,
+    bdate date,
+    address varchar(30),
+    sex char(1),
+    salary decimal(10, 2),
+    super_ssn char(9),
+    dno integer NOT NULL,
+    PRIMARY KEY (ssn)
 );
 
-create table department (
-  dname varchar(15) not null,
-  dnumber integer not null,
-  mgr_ssn char(9) not null,
-  mgr_start_date date not null,
-  primary key (dnumber)
+CREATE TABLE department (
+    dname varchar(15) NOT NULL,
+    dnumber integer NOT NULL,
+    mgr_ssn char(9) NOT NULL,
+    mgr_start_date date NOT NULL,
+    PRIMARY KEY (dnumber)
 );
 
-create table dept_locations (
-  dnumber integer not null,
-  dlocation integer not null,
-  primary key (dnumber, dlocation)
+CREATE TABLE dept_locations (dnumber integer NOT NULL, dlocation integer NOT NULL, PRIMARY KEY (dnumber, dlocation));
+
+CREATE TABLE project (pname varchar(15) NOT NULL, pnumber integer NOT NULL, plocation integer, dnum integer NOT NULL, PRIMARY KEY (pnumber));
+
+CREATE TABLE works_on (essn char(9) NOT NULL, pno integer NOT NULL, hours decimal(3, 1) NOT NULL, PRIMARY KEY (essn, pno));
+
+CREATE TABLE dependent (
+    essn char(9) NOT NULL,
+    dependent_name varchar(15) NOT NULL,
+    sex char(1),
+    bdate date,
+    relationship varchar(8),
+    PRIMARY KEY (essn, dependent_name)
 );
 
-create table project (
-  pname varchar(15) not null,
-  pnumber integer not null,
-  plocation integer,
-  dnum integer not null,
-  primary key (pnumber)
-);
+CREATE TABLE location (lnumber integer NOT NULL, lname varchar(15) NOT NULL, PRIMARY KEY (lnumber));
 
-create table works_on (
-  essn char(9) not null,
-  pno integer not null,
-  hours decimal(3, 1) not null,
-  primary key (essn, pno)
-);
+SET
+    search_path TO public;
 
-create table dependent (
-  essn char(9) not null,
-  dependent_name varchar(15) not null,
-  sex char(1),
-  bdate date,
-  relationship varchar(8),
-  primary key (essn, dependent_name)
-);
-
-create table location (
-  lnumber integer not null,
-  lname varchar(15) not null,
-  primary key (lnumber)
-);
-
-set search_path to public; -- Needed since sqlx migrations have issues otherwise
+-- Needed since sqlx migrations have issues otherwise

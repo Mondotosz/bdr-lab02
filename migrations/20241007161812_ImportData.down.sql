@@ -1,11 +1,13 @@
-SET SEARCH_PATH TO company;
+SET
+    SEARCH_PATH TO company;
 
-TRUNCATE TABLE department;
-TRUNCATE TABLE dependent;
-TRUNCATE TABLE dept_locations;
-TRUNCATE TABLE employee;
-TRUNCATE TABLE project;
-TRUNCATE TABLE works_on;
-TRUNCATE TABLE location;
+TRUNCATE TABLE department,
+dependent,
+dept_locations,
+employee,
+project,
+works_on,
+location;
 
-SET SEARCH_PATH TO public;
+SET
+    SEARCH_PATH TO public;

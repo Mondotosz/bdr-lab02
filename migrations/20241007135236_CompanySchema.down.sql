@@ -1,2 +1,2 @@
 -- Add down migration script here
-drop schema if exists company cascade;
+DROP SCHEMA if EXISTS company cascade;
