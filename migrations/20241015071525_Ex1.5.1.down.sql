@@ -1,0 +1,16 @@
+SET
+    SEARCH_PATH TO company;
+
+BEGIN;
+
+DELETE FROM employee
+  WHERE ssn IN ('222222222', '333333333', '444444444');
+
+ALTER TABLE employee
+DROP CONSTRAINT fk_super_ssn,
+ADD CONSTRAINT fk_super_ssn FOREIGN KEY (super_ssn) REFERENCES employee (ssn) DEFERRABLE;
+
+COMMIT;
+
+SET
+    SEARCH_PATH TO public;
