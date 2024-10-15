@@ -21,7 +21,30 @@ SET
 WHERE
     ssn = '999887777';
 
-COMMIT;
+-- Rollback since we don't actually want to update the database as it would
+-- clash with the rest of the task
+ROLLBACK;
+
+SET
+    SEARCH_PATH TO company;
+
+BEGIN;
+
+-- (b)
+-- WARN: Doesn't work since it violates the foreign key `fk_essn` on `works_on`.
+-- This can be avoided by specifying the `ON DELETE` action
+-- DELETE FROM employee
+-- WHERE
+--     ssn = '999887777';
+ALTER TABLE works_on
+DROP CONSTRAINT fk_essn,
+ADD CONSTRAINT fk_essn FOREIGN KEY (essn) REFERENCES employee (ssn) ON DELETE CASCADE DEFERRABLE;
+
+DELETE FROM employee
+WHERE
+    ssn = '999887777';
+
+ROLLBACK;
 
 SET
     SEARCH_PATH TO public;
