@@ -1,0 +1,20 @@
+SET
+    SEARCH_PATH TO company;
+
+BEGIN;
+SET CONSTRAINTS ALL DEFERRED;
+
+DELETE FROM employee
+  WHERE dno = 100;
+
+DELETE FROM department
+  WHERE dnumber = 100;
+
+COMMIT;
+
+ALTER TABLE employee
+DROP CONSTRAINT fk_dno,
+ADD CONSTRAINT fk_dno FOREIGN KEY (dno) REFERENCES department (dnumber) DEFERRABLE;
+
+SET
+    SEARCH_PATH TO public;
